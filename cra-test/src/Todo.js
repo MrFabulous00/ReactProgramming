@@ -1,5 +1,5 @@
-import React from 'react';
+import React from "react";
 
 export function Todo([title]) {
-  return <div>{title}</div>
+  return <div>{title}</div>;
 }
