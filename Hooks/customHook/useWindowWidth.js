@@ -26,8 +26,3 @@ function useWindowWidth() {
   }, []);
   return width;
 }
-
-function WidthPrinter() {
-  const width = userWindowWidth();
-  return <div>{`width is ${width}`}</div>;
-}

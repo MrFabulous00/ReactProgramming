@@ -19,7 +19,9 @@
 //   );
 // }
 
-function useUser(userId) {
+import { useState, useEffect } from "react";
+
+export default function useUser(uerId) {
   const [user, setUser] = useState(null);
   useEffect(() => {
     getUserApi(userId).then((data) => setUser(data));
@@ -27,6 +29,10 @@ function useUser(userId) {
   return user;
 }
 
-function Profile({ userId }) {
-  const user = useUser(userId);
+const USER1 = { name: "mike", age: 23 };
+const USER2 = { name: "jane", age: 31 };
+function getUserApi(userId) {
+  setTimeout(() => {
+    res(userId % 2 ? USER1 : USER2);
+  });
 }

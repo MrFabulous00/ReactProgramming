@@ -23,15 +23,23 @@
 // }
 
 // context API 사용o
-const UserContext = React.createContext("");
+import React, { createContext, useContext } from "React";
 
-function App() {
+const UserContext = React.createContext(""); // Provider를 찾지 못하면 이걸로 이걸로 초기값으로 할당
+
+export default function App() {
+  const [name, setName] = useState("mike");
   return (
     <div>
-      <UserContext.Provider value="mike">
+      <UserContext.Provider value={name}>
         <div>상단 메뉴</div>
         <Profile />
         <div>하단 메뉴</div>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </UserContext.Provider>
     </div>
   );
@@ -47,9 +55,14 @@ function Profile() {
 }
 
 function Greeting() {
-  return (
-    <UserContext.Consumer>
-      {(username) => <p>{`${username}님 안녕하세요`}</p>}
-    </UserContext.Consumer>
-  );
+  const username = useContext(UserContext);
+  return <p>{`${username}님 안녕하세요`}</p>;
 }
+
+// function Greeting() {
+//   return (
+//     <UserContext.Consumer>
+//       {(username) => <p>{`${username}님 안녕하세요`}</p>}
+//     </UserContext.Consumer>
+//   );
+// }

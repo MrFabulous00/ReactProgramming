@@ -1,3 +1,7 @@
+//consumer 컴퍼넌트에서 데이터를 읽어드리는 경우
+
+import { useContext } from "React";
+
 const UserContext = React.createContext("");
 const ThemeContext = React.createContext("dark");
 
@@ -25,26 +29,24 @@ function Profile() {
 }
 
 function Greeting() {
+  const theme = useContext(ThemeContext);
+  const username = useContext(UserContext);
   return (
-    <ThemeContext.Consumer>
-      {(theme) => {
-        <UserContext.Consumer>
-          {(username) => (
-            <p
-              style={{ color: theme === "dark" ? "gray" : "green" }}
-            >{`${username}님 안녕하세요`}</p>
-          )}
-        </UserContext.Consumer>;
-      }}
-    </ThemeContext.Consumer>
+    <p
+      style={{ color: theme === "dark" ? "gray" : "green" }}
+    >{`${username}님 안녕하세요`}</p>
   );
 }
 
+import React, { useContext, createContext, useState } from "React";
+
+// consumer 컴퍼넌트에서 데이터를 수정할 경우
 const UserContext = React.createContext({ username: "", helloCount: 0 });
 const SetUserContext = React.createContext(() => {});
 
 function App() {
   const [user, setUser] = userState({ username: "mike", helloCount: 0 });
+
   return (
     <div>
       <SetUserContext.Provider value={setUser}>
